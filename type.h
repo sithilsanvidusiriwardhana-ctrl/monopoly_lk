@@ -24,8 +24,10 @@ typedef struct player_Roll {
 
 // bord 
 void  board(int i , int di_value , int * out);
-int die_troll();
+int game_turn(int round, struct player *players);
+
 
 //game
 void game();
+int die_troll();
 #endif

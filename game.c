@@ -4,7 +4,7 @@
 #include "type.h"
 //int Value[4];
 struct player_Roll Rolls[4];
-struct player players[4];
+ struct player players[4];
  char *player[4] ={ "Aggressive Investore " , "Conservative Banker" , "Risk Taker" , "Oppertunistic Treader" };
 int die_troll(void)
 {
@@ -149,11 +149,11 @@ void convert(){
 
 }
 
-int game_turn(int round){
+/*int game_turn(int round, struct player *players){
       for (int turn = 0; turn < 4; turn++){
            int add = 0;
            add = die_troll();
-           players[turn].current_position += die_troll();
+           players[turn].current_position += add;
            if ( players[turn].current_position>= 40){
                   players[turn].current_position = players[turn].current_position - 40;
                   players[turn].money += 2000;
@@ -162,15 +162,17 @@ int game_turn(int round){
       printf("%s move from squere %d to squere %d\n", players[turn].player_name,players[turn].current_position-add , players[turn].current_position);
       }
     return ++round;
-}
+}*/
 
 void game(){
     sort();
     convert();
     int round = 0;
     while ( round< 500){
-        round = game_turn(round);   
+        round = game_turn(round, players); 
+      
     }
+    printf("%d\n",players[2].current_position);
 }
 
 

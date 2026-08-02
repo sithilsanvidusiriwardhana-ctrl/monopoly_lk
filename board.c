@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<time.h>
 #include "type.h"
+
 void  board(int i , int di_value , int * out){
      ex boad[40] = { 
         {Start,Go },
@@ -46,15 +47,17 @@ void  board(int i , int di_value , int * out){
         { Property , Darkblue}
 };
 
+}
 
-int game_turn(int round){
+int  game_turn(int round, struct player *players){
       for (int turn = 0; turn < 4; turn++){
+           struct player *p = &players[turn];
            int add = 0;
            add = die_troll();
-           players[turn].current_position += die_troll();
-           if ( players[turn].current_position>= 40){
-                  players[turn].current_position = players[turn].current_position - 40;
-                  players[turn].money += 2000;
+           p -> current_position += add;
+           if ( p -> current_position>= 40){
+                  p ->current_position = players[turn].current_position - 40;
+                  p -> money += 2000;
            }
       printf("dye trolls %d\n", add);
       printf("%s move from squere %d to squere %d\n", players[turn].player_name,players[turn].current_position-add , players[turn].current_position);
@@ -62,6 +65,5 @@ int game_turn(int round){
     return ++round;
 }
 
-}
 
 
