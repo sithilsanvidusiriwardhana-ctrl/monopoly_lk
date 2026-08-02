@@ -1,0 +1,17 @@
+player_roll{
+    int player_id;
+    int roll_value;
+}
+
+player{
+    int player_id
+    char *player_name
+    int player_position
+    int player_turn
+    int add
+    int clash
+    int property_value 
+    int  turn
+    
+
+}

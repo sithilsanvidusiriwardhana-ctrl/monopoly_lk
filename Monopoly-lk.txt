@@ -1,0 +1,66 @@
+>>>bord{
+        Type   -> purchase value,  Mortagage value , house cost , hotel cost 
+        Name
+        current owner
+        mortagage status
+        insuranse status
+        number of buiding
+}
+ 
+die{
+        die 1 value
+        die 2 value
+        sum of value
+        if round == 0
+              start()
+        else
+               
+}
+
+start {
+        if p1 > p2            // select th order that round should goes 
+              if p1 > p3 
+                   if p1> p4 
+                           o is player 1
+                   else
+                           1o is player 2
+        
+}
+
+
+continue {
+        order = [4,2,3,1] // player order 
+        possition= [8,12,5,32]//  current possition
+        round = [ 1,1,1,1]
+        possition += die_value
+        if gotojail is ok
+        if p[i] reach bord[40]
+            round[i] ++
+        if possito == goto jail
+                 jail
+        }
+        if payer is come to utility{
+                utility = utility()
+        }
+// there three thing to do using dir
+     1. select the possition
+     2. go hed
+     3. relesed jail
+     4. calculate the utility
+     
+gotojail{
+        turn = 1
+        if play money : break
+        elif die two value equal: break
+        else  turn equal 3 round : break
+                
+}
+
+utility(){
+        if player has two utylity: return 10 * die_value
+        elif player has one utility : return 4 * die_value
+}
+
+player {
+        
+}
