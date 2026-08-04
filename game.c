@@ -4,6 +4,7 @@
 #include "type.h"
 //int Value[4];
 struct player_Roll Rolls[4];
+int full_round = 0;
  struct player players[4];
  char *player[4] ={ "Aggressive Investore " , "Conservative Banker" , "Risk Taker" , "Oppertunistic Treader" };
 int die_troll(void)
@@ -142,6 +143,7 @@ void convert(){
         players[i].player_id = Rolls[i].player_id;
         players[i].player_name = player[(Rolls[i].player_id)-1];
         players[i].player_turn = i+1;
+        players[i].player_round = 0;
         players[i].current_position = 0;
         players[i].money = 30000;
 
@@ -149,6 +151,32 @@ void convert(){
 
 }
 
+void  game_turn( ){
+     int old_position;
+      for (int turn = 0; turn < 4; turn++){
+           struct player *p = &players[turn];
+           int add = 0;
+           add = die_troll();
+           p -> current_position += add;
+           if ( p -> current_position>= 40){
+                  p ->current_position = players[turn].current_position - 40;
+                  p -> money += 2000;
+                  p -> player_round++;
+                  
+                  printf("\ndye trolls %d\n", add);
+                   old_position = 40 + ( players[turn].current_position - add);
+                   printf("%s move from squere %d to squere %d\n", players[turn].player_name,old_position, players[turn].current_position);
+                  printf("\n%s passing go " , p -> player_name);
+                  printf(" \ncollected LKR 2000\n");
+                  printf("current balance %d\n", p -> money);
+           }
+        else{
+      printf("\ndye trolls %d\n", add);
+     old_position = players[turn].current_position - add;
+      printf("%s move from squere %d to squere %d\n", players[turn].player_name,old_position, players[turn].current_position);
+      }
+    }
+}
 /*int game_turn(int round, struct player *players){
       for (int turn = 0; turn < 4; turn++){
            int add = 0;
@@ -168,11 +196,24 @@ void game(){
     sort();
     convert();
     int round = 0;
-    while ( round< 500){
-        round = game_turn(round, players); 
+    while ( round <  1){
+       game_turn( );
+       int small = players[0].player_round;
+       for ( int i = 0; i <4 ; i++){
+         if ( small >  players[i].player_round ){
+            round = players[i].player_round;
+         }
+            else{
+               round = small;
+            }
+         
+
+       }
+
+       full_round++;
       
     }
-    printf("%d\n",players[2].current_position);
+    printf("%d\n%d\n%d\n%d\n",players[0].player_round,players[2].player_round,players[3].player_round,players[0].player_round);
 }
 
 

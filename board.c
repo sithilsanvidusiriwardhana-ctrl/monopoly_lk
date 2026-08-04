@@ -3,8 +3,8 @@
 #include<time.h>
 #include "type.h"
 
-void  board(int i , int di_value , int * out){
-     ex boad[40] = { 
+int  board(int i){
+     boards boad[40] = { 
         {Start,Go },
         {Property,brown},
         { Event ,    },
@@ -46,10 +46,12 @@ void  board(int i , int di_value , int * out){
         {Bank},
         { Property , Darkblue}
 };
+return boad[i].col1;
 
 }
 
-int  game_turn(int round, struct player *players){
+/*void  game_turn( struct player *players){
+     int old_position;
       for (int turn = 0; turn < 4; turn++){
            struct player *p = &players[turn];
            int add = 0;
@@ -58,12 +60,22 @@ int  game_turn(int round, struct player *players){
            if ( p -> current_position>= 40){
                   p ->current_position = players[turn].current_position - 40;
                   p -> money += 2000;
+                  p -> player_round++;
+                  
+                  printf("\ndye trolls %d\n", add);
+                   old_position = 40 + ( players[turn].current_position - add);
+                   printf("%s move from squere %d to squere %d\n", players[turn].player_name,old_position, players[turn].current_position);
+                  printf("\n%s passing go " , p -> player_name);
+                  printf(" \ncollected LKR 2000\n");
+                  printf("current balance %d\n", p -> money);
            }
-      printf("dye trolls %d\n", add);
-      printf("%s move from squere %d to squere %d\n", players[turn].player_name,players[turn].current_position-add , players[turn].current_position);
+        else{
+      printf("\ndye trolls %d\n", add);
+     old_position = players[turn].current_position - add;
+      printf("%s move from squere %d to squere %d\n", players[turn].player_name,old_position, players[turn].current_position);
       }
-    return ++round;
-}
+} 
+}*/
 
 
 

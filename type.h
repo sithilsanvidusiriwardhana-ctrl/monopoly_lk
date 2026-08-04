@@ -8,14 +8,15 @@ typedef struct player{
        int player_id;
        char *player_name;
        int player_turn;
+       int player_round;
        int current_position;
        int money;
        
 };
- typedef  struct ex{
+ typedef  struct boards{
     enum type  col1;
     enum place col2;
-} ex ;
+} boards ;
 typedef struct player_Roll {
        int player_id;
        int roll_value;
@@ -23,8 +24,8 @@ typedef struct player_Roll {
 
 
 // bord 
-void  board(int i , int di_value , int * out);
-int game_turn(int round, struct player *players);
+int  board(int i );
+
 
 
 //game
