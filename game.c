@@ -6,7 +6,7 @@
 struct player_Roll Rolls[4];
 int full_round = 0;
  struct player players[4];
- char *player[4] ={ "Aggressive Investore " , "Conservative Banker" , "Risk Taker" , "Oppertunistic Treader" };
+ char *player[5] ={ "Aggressive Investore " , "Conservative Banker" , "Risk Taker" , "Oppertunistic Treader" , "Bank" };
 int die_troll(void)
 {
  int die1 = (rand() % 6) + 1;
@@ -95,24 +95,24 @@ void duplicate(struct player_Roll arr[],int count){
                 struct player_Roll temp_rolls[4];
 
                int k ;
-               printf("\nequal player\n");
+              // printf("\nequal player\n");
                for ( k = 0; k < num_tied ; k++){
                         temp_rolls[k].player_id = arr[start_ind+k].player_id;
                         
-                        printf("**%s** \n",player[(temp_rolls[k].player_id) - 1]);
+                      //  printf("**%s** \n",player[(temp_rolls[k].player_id) - 1]);
 
                         temp_rolls[k].roll_value = die_troll();
                     }
-                printf("that player's re try a die\n");
+               // printf("that player's re try a die\n");
             
                 
                 mergeSort( temp_rolls,0, num_tied -1);
                 for( k =0 ;k <num_tied; k++){
                     Rolls[start_ind+k].player_id = temp_rolls[k].player_id;
                     Rolls[start_ind + k].roll_value = (temp_rolls[k].roll_value) + 12;
-                    printf("next round die value \n");
+                   /* printf("next round die value \n");
                      printf("**%s rolls",player[(temp_rolls[k].player_id) - 1]);
-                     printf("%d\n", temp_rolls[k].roll_value);
+                     printf("%d\n", temp_rolls[k].roll_value);*/
                 }
                 
                     
@@ -130,12 +130,12 @@ void sort()
     while (has_check(Rolls)){
         duplicate(Rolls,4);
     }
-    printf("\n%s  will start the turn\n\n",player[(Rolls[0].player_id) - 1]);
+   /* printf("\n%s  will start the turn\n\n",player[(Rolls[0].player_id) - 1]);
     printf("\nturn order :\n");
     for (int i =0 ; i < 4; i++){
       printf("\t%s  \n",player[(Rolls[i].player_id) - 1]);
 
-}
+}*/
 }
 
 void convert(){
@@ -146,9 +146,45 @@ void convert(){
         players[i].player_round = 0;
         players[i].current_position = 0;
         players[i].money = 30000;
+        players[i].buyproperty[0] = 0;
 
     }
 
+}
+void check_situation(int status ,int place , int player_id  ){
+              if (status  ){
+                int propertyprice = board( place , 2);
+                playertodo(propertyprice, players ,player_id , place , 1 );
+              }
+              else {
+                printf("you can not buy it\n");
+              }
+}
+void player_behavior(int place , int player_id ,int money)
+{
+        int current_possition = board(place , 1);
+        int status ;
+        switch (current_possition)
+        {
+        case 1:
+               status = current_status(place );
+              check_situation(status , place ,player_id);
+              break;
+        case 2 :
+             break;    
+        case 3:
+              break;
+        case 4:
+             break;
+        case 5:
+             break;
+        case 6:
+             break;
+        case 7:
+             break;   
+        default:
+            break;
+        }     
 }
 
 void  game_turn( ){
@@ -163,7 +199,7 @@ void  game_turn( ){
                   p -> money += 2000;
                   p -> player_round++;
                   
-                  printf("\ndye trolls %d\n", add);
+             /*     printf("\ndye trolls %d\n", add);
                    old_position = 40 + ( players[turn].current_position - add);
                    printf("%s move from squere %d to squere %d\n", players[turn].player_name,old_position, players[turn].current_position);
                   printf("\n%s passing go " , p -> player_name);
@@ -173,24 +209,13 @@ void  game_turn( ){
         else{
       printf("\ndye trolls %d\n", add);
      old_position = players[turn].current_position - add;
-      printf("%s move from squere %d to squere %d\n", players[turn].player_name,old_position, players[turn].current_position);
+      printf("%s move from squere %d to squere %d\n", players[turn].player_name,old_position, players[turn].current_position);*/
       }
+      player_behavior(p -> current_position, p -> player_id , p->money);
     }
 }
-/*int game_turn(int round, struct player *players){
-      for (int turn = 0; turn < 4; turn++){
-           int add = 0;
-           add = die_troll();
-           players[turn].current_position += add;
-           if ( players[turn].current_position>= 40){
-                  players[turn].current_position = players[turn].current_position - 40;
-                  players[turn].money += 2000;
-           }
-      printf("dye trolls %d\n", add);
-      printf("%s move from squere %d to squere %d\n", players[turn].player_name,players[turn].current_position-add , players[turn].current_position);
-      }
-    return ++round;
-}*/
+
+
 
 void game(){
     sort();
@@ -201,11 +226,9 @@ void game(){
        int small = players[0].player_round;
        for ( int i = 0; i <4 ; i++){
          if ( small >  players[i].player_round ){
-            round = players[i].player_round;
+            small = players[i].player_round;
          }
-            else{
-               round = small;
-            }
+         round = small;
          
 
        }
@@ -213,7 +236,7 @@ void game(){
        full_round++;
       
     }
-    printf("%d\n%d\n%d\n%d\n",players[0].player_round,players[2].player_round,players[3].player_round,players[0].player_round);
+   // printf("%d\n%d\n%d\n%d\n%d\n",players[0].player_round,players[2].player_round,players[3].player_round,players[1].player_round,full_round);
 }
 
 

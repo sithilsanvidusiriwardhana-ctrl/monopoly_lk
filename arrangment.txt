@@ -8,10 +8,18 @@ player{
     char *player_name
     int player_position
     int player_turn
-    int add
-    int clash
-    int property_value 
-    int  turn
+    int player_round
+    int money
+    
     
 
+}
+
+
+
+board{
+    type;
+    place;
+    owner;
+    monop
 }
